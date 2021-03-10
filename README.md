@@ -31,3 +31,7 @@ make TARGET_IP=1.2.3.4 TARGET_USER=root ansible-install
 >You need to provide a `TARGET_IP`. Without this variable the command will not work.
 
 Now you need to wait the command to finish. Be patient and take a coffee :coffee:.
+
+## License
+
+Check [`LICENSE`](LICENSE) for more information.
