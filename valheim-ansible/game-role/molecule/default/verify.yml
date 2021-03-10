@@ -1,0 +1,27 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check user exists
+      user:
+        name: test
+      register: user_status
+
+    - name: Test user exists
+      assert:
+        that: not user_status.changed
+
+    - name: Retrieve information from Steam directory
+      stat:
+        path: /home/test/Steam
+      register: steam_directory
+
+    - name: Test that Steam directory was created correctly
+      assert:
+        that:
+          - steam_directory.stat.exists
+          - steam_directory.stat.isdir
+          - steam_directory.stat.pw_name == 'test'
+          - steam_directory.stat.gr_name == 'test'
+          - steam_directory.stat.mode == '0755'

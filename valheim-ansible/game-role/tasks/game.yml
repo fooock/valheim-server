@@ -1,0 +1,57 @@
+---
+- name: "Create {{ game_dir }} directory"
+  file:
+    path: "{{ game_dir }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+
+- name: "Create {{ game_data_dir }} directory"
+  file:
+    path: "{{ game_data_dir }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+
+- name: "Install Valheim server"
+  ansible.builtin.shell: "{{ steam_cmd_dir }}/steamcmd.sh +login anonymous +force_install_dir {{ game_dir }} +app_update {{ game_id }} validate +exit"
+  become: true
+  become_user: "{{ steam_user }}"
+  become_method: su
+  tags:
+    - molecule-notest
+    - notest
+
+- name: Copy values.env file for game server systemd service
+  template:
+    src: "values.env"
+    dest: "{{ game_dir }}/values.env"
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+    mode: '0755'
+
+- name: Copy game server systemd service unit
+  template:
+    src: "valheim.service.j2"
+    dest: /lib/systemd/system/valheim.service
+
+- name: Copy game server start.sh script
+  template:
+    src: "start.sh.j2"
+    dest: "{{ game_dir }}/my-start.sh"
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+    mode: '0755'
+
+- name: Enable and start valheim.service systemd unit
+  service:
+    name: valheim.service
+    enabled: true
+    state: started
+  # our test container does not have systemd. We can skip
+  # this task in order to make things simple
+  tags:
+    - molecule-notest
+    - notest

@@ -1,0 +1,24 @@
+---
+- name: "Ensure group {{ steam_user }} exists"
+  group:
+    name: "{{ steam_user }}"
+    state: present
+
+- name: "Add user '{{ steam_user }}'"
+  user:
+    create_home: yes
+    name: "{{ steam_user }}"
+    home: "{{ steam_user_home }}"
+    groups:
+      - "{{ steam_user }}"
+      - sudo
+    append: yes
+    shell: /bin/bash
+
+- name: "Allow {{ steam_user }} user to have passwordless sudo"
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ steam_user }}"
+    line: "{{ steam_user }} ALL=NOPASSWD: ALL"
+    validate: "visudo -cf %s"

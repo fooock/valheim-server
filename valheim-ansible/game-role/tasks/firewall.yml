@@ -1,0 +1,23 @@
+---
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Allow SSH connections
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow port range 2456-2458/tcp
+  ufw:
+    rule: allow
+    port: 2456:2458
+    proto: tcp
+    comment: Required by Valheim game server
+
+- name: Allow port range 2456-2458/udp
+  ufw:
+    rule: allow
+    port: 2456:2458
+    proto: udp
+    comment: Required by Valheim game server

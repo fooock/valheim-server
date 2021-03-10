@@ -1,0 +1,9 @@
+---
+- name: Ensure clocksource is set to TSC
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: GRUB_CMDLINE_LINUX="clocksource=tsc tsc=reliable"
+
+- name: Update grub settings
+  shell: update-grub

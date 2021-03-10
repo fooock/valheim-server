@@ -1,0 +1,8 @@
+---
+steam_user: steam
+steam_user_home: /home/{{ steam_user }}
+steam_cmd_dir: /home/{{ steam_user }}/Steam
+
+game_id: 896660
+game_dir: /home/{{ steam_user }}/valheim
+game_data_dir: /home/{{ steam_user }}/data

@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    steam_user: test
+  tasks:
+    - name: "Include game-role"
+      include_role:
+        name: "game-role"

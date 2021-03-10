@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export templdpath=$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
+export SteamAppId=892970
+
+echo "Starting server..."
+./valheim_server.x86_64 -nographics -savedir "{{ game_data_dir }}" -name "$GS_NAME" -port $GS_PORT -world "$GS_WORLD" -password "$GS_PASSWORD" -public $GS_PUBLIC
+
+export LD_LIBRARY_PATH=$templdpath

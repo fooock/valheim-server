@@ -1,0 +1,75 @@
+---
+- name: Add i386 architecture
+  command: dpkg --add-architecture i386
+  tags:
+    - molecule-idempotence-notest
+
+- name: Install required dependencies for SteamCMD
+  apt:
+    pkg:
+      - lib32gcc1
+    update_cache: yes
+
+- name: "Create {{ steam_cmd_dir }} directory"
+  file:
+    path: "{{ steam_cmd_dir }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+
+- name: "Unzip SteamCMD from remote into {{ steam_cmd_dir }}"
+  unarchive:
+    src: https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+    dest: "{{ steam_cmd_dir }}"
+    remote_src: yes
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+  tags:
+    - molecule-notest
+    - notest
+
+- name: "Change {{ steam_cmd_dir }} ownership, group and permissions"
+  ansible.builtin.file:
+    path: "{{ steam_cmd_dir }}"
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+    mode: '0755'
+    state: directory
+    recurse: yes
+  tags:
+    - molecule-idempotence-notest
+
+- name: "Initialize SteamCMD using steamcmd +quit"
+  ansible.builtin.shell: "{{ steam_cmd_dir }}/steamcmd.sh +quit"
+  become: true
+  become_user: "{{ steam_user }}"
+  become_method: su
+  tags:
+    - molecule-notest
+    - notest
+
+- name: "Create {{ steam_user_home }}/.steam/sdk32 directory"
+  file:
+    path: "{{ steam_user_home }}/.steam/sdk32"
+    state: directory
+    mode: '0755'
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+
+# based on https://github.com/CM2Walki/steamcmd
+- name: Create symbolic links to SteamCMD binaries
+  file:
+    state: link
+    owner: "{{ steam_user }}"
+    group: "{{ steam_user }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { src: "{{ steam_cmd_dir }}/linux32/steamclient.so", dest: "{{ steam_user_home }}/.steam/sdk32/steamclient.so" }
+    - { src: "{{ steam_cmd_dir }}/linux32/steamcmd", dest: "{{ steam_cmd_dir }}/linux32/steam" }
+    - { src: "{{ steam_cmd_dir }}/steamcmd.sh", dest: "{{ steam_cmd_dir }}/steam.sh" }
+    - { src: "{{ steam_cmd_dir }}/linux64/steamclient.so", dest: "/usr/lib/x86_64-linux-gnu/steamclient.so" }
+  tags:
+    - molecule-notest
+    - notest

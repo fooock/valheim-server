@@ -1,0 +1,56 @@
+- name: Provision Valheim game server image
+  hosts: all
+
+  pre_tasks:
+    - name: Shutdown if not Ubuntu system
+      command: /sbin/shutdown -t now
+      when: ansible_facts['os_family'] == "Ubuntu"
+
+    - name: Update system
+      apt:
+        update_cache: yes
+        upgrade: dist
+      tags:
+        - init
+
+  tasks:
+    - name: OS hardening
+      import_role:
+        name: devsec.hardening.os_hardening
+      vars:
+        os_auth_retries: 3
+        os_auditd_max_log_file_action: rotate
+        os_auditd_max_log_file: 5
+      tags:
+        - hardening
+        - os
+
+    - name: SSH hardening
+      import_role:
+        name: devsec.hardening.ssh_hardening
+      vars:
+        ssh_permit_root_login: 'yes'
+        ssh_deny_users: 'steam'
+        ssh_deny_groups: 'steam'
+      tags:
+        - hardening
+        - ssh
+
+    - name: Install fail2ban
+      import_role:
+        name: robertdebock.fail2ban
+      tags:
+        - ssh
+        - fail2ban
+
+    - name: Install Valheim game server
+      import_role:
+        name: game-role
+      tags:
+        - game
+        - steam
+
+    - name: Configure grub
+      import_tasks: grub.yml
+      tags:
+        - grub
