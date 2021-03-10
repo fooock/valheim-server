@@ -1,0 +1,30 @@
+{
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./../valheim-ansible/playbook.yml"
+    }
+  ],
+  "builders": [
+    {
+      "image": "ubuntu-20.04",
+      "location": "nbg1",
+      "server_type": "cx11",
+      "ssh_username": "root",
+      "ssh_timeout": "30m",
+      "type": "hcloud",
+      "snapshot_labels": {
+        "name": "valheim-server",
+        "tool": "packer",
+        "date": "{{ isotime }}"
+      },
+      "snapshot_name": "valheim-server-{{ isotime }}"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "hcloud-manifest.json"
+    }
+  ]
+}

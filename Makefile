@@ -21,3 +21,18 @@ ifndef TARGET_IP
 $(error TARGET_IP is not set. Please provide a valid IP/host)
 endif
 	ansible-playbook -i $(TARGET_IP), -u $(TARGET_USER) valheim-ansible/playbook.yml
+
+##                    _
+##   _ __   __ _  ___| | _____ _ __
+##  | '_ \ / _` |/ __| |/ / _ \ '__|
+##  | |_) | (_| | (__|   <  __/ |
+##  | .__/ \__,_|\___|_|\_\___|_|
+##  |_|
+
+PACKER_BIN := /usr/local/bin/packer
+
+packer-validate:
+	$(PACKER_BIN) validate hcloud.json
+
+packer-run:
+	$(PACKER_BIN) build hcloud.json
