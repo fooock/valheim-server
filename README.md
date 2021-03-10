@@ -13,7 +13,7 @@ If you use this software for commercial purposes, please consider making a donat
 
 You need to have installed in your system in order to deploy a fully functional game server:
 
-* [`Ansible`](https://www.ansible.com/).
+* [`Ansible`](https://www.ansible.com/)
 * `make`
 
 >If you are on Windows you can use [`wsl`](https://docs.microsoft.com/windows/wsl/install-win10) in order to install the game server. 
@@ -22,4 +22,12 @@ Note that at this time, the game server only supports [`Ubuntu`](https://ubuntu.
 
 ## Installation
 
-First, clone this repository
+First, clone this repository. When done, execute the following command using your own values for the `TARGET_USER` and `TARGET_IP` variables that correspond to **your** server info:
+
+```sh
+make TARGET_IP=1.2.3.4 TARGET_USER=root ansible-install
+```
+
+>You need to provide a `TARGET_IP`. Without this variable the command will not work.
+
+Now you need to wait the command to finish. Be patient and take a coffee :coffee:.
