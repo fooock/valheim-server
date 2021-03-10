@@ -9,8 +9,17 @@ This project contains all required components to deploy a ready to use `Valheim`
 
 If you use this software for commercial purposes, please consider making a donation or a horde of bloodthirsty vikings led by Odin will fall on you.
 
-## Requirements
+### Requirements
 
-The only requirement you need to have installed in your system in order to deploy a fully functional game server is [`Ansible`](https://www.ansible.com/). If you do not have it, please install it in order to continue.
+You need to have installed in your system in order to deploy a fully functional game server:
+
+* [`Ansible`](https://www.ansible.com/).
+* `make`
+
+>If you are on Windows you can use [`wsl`](https://docs.microsoft.com/windows/wsl/install-win10) in order to install the game server. 
+
 Note that at this time, the game server only supports [`Ubuntu`](https://ubuntu.com/) as base operating system. Choose a Ubuntu compatible cloud provider.
 
+## Installation
+
+First, clone this repository
