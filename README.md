@@ -40,12 +40,12 @@ If you want to use `Packer` to create game server snapshots continue reading. No
 
 #### [`Hetzner`](https://www.hetzner.com/cloud)
 
->The ID of this provider is `hcloud`
+>ID: `hcloud`
 
 To use Hetzner, first you need to generate a new API token with *Read and Write* permissions. Save this token in a local environment variable called `HCLOUD_TOKEN` and then execute this command:
 
 ```bash
-make packer-run
+make CLOUD=hcloud packer-run
 ```
 
 Now, wait until finish.
