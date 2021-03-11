@@ -40,3 +40,15 @@ packer-run:
 ifeq ($(CLOUD), hcloud)
 	$(PACKER_BIN) build valheim-packer/hcloud.json
 endif
+
+                                 
+##                          _    
+##    __ _  __ _  ___ _ __ | |_  
+##   / _` |/ _` |/ _ \ '_ \| __| 
+##  | (_| | (_| |  __/ | | | |_  
+##   \__,_|\__, |\___|_| |_|\__| 
+##         |___/                 
+##                               
+
+agent-build:
+	go build -o valheim-agent ./valheim-agent
