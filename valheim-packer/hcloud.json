@@ -2,7 +2,9 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "./valheim-ansible/playbook.yml"
+      "playbook_file": "./valheim-ansible/playbook.yml",
+      "galaxy_file": "./valheim-ansible/requirements.yml",
+      "galaxy_force_install": true
     }
   ],
   "builders": [
@@ -16,7 +18,6 @@
       "snapshot_labels": {
         "name": "valheim-server",
         "tool": "packer",
-        "date": "{{ isotime }}",
         "github": "fooock"
       },
       "snapshot_name": "valheim-server-{{ isotime }}"
