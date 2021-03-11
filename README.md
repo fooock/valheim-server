@@ -1,7 +1,6 @@
 # `Valheim` server installer
 
 ![](https://img.shields.io/badge/Steam-Valheim-purple?style=for-the-badge&logo=steam)
-[![Discord](https://img.shields.io/discord/812069608064417842?color=purple&logo=discord&logoColor=white&style=for-the-badge)](https://discord.gg/X9cN2cawgW)
 
 > :construction: Project in early development
 
