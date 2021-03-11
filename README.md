@@ -22,6 +22,8 @@ Note that at this time, the game server only supports [`Ubuntu`](https://ubuntu.
 
 ## Installation
 
+>See [using packer](#using-packer) if you want to create server snapshots in your favourite cloud provider.
+
 First, clone this repository. When done, execute the following command using your own values for the `TARGET_USER` and `TARGET_IP` variables that correspond to **your** server info:
 
 ```sh
@@ -31,6 +33,22 @@ make TARGET_IP=1.2.3.4 TARGET_USER=root ansible-install
 >You need to provide a `TARGET_IP`. Without this variable the command will not work.
 
 Now you need to wait the command to finish. Be patient and take a coffee :coffee:.
+
+## Using `Packer`
+
+If you want to use `Packer` to create game server snapshots continue reading. Note that the list of currently supported cloud providers is not complete. If you want to add a new cloud provider, create a [feature request](https://github.com/fooock/valheim-server/issues).
+
+#### [`Hetzner`](https://www.hetzner.com/cloud)
+
+>The ID of this provider is `hcloud`
+
+To use Hetzner, first you need to generate a new API token with *Read and Write* permissions. Save this token in a local environment variable called `HCLOUD_TOKEN` and then execute this command:
+
+```bash
+make packer-run
+```
+
+Now, wait until finish.
 
 ## License
 

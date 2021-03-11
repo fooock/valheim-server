@@ -2,7 +2,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "./../valheim-ansible/playbook.yml"
+      "playbook_file": "./valheim-ansible/playbook.yml"
     }
   ],
   "builders": [
@@ -16,7 +16,8 @@
       "snapshot_labels": {
         "name": "valheim-server",
         "tool": "packer",
-        "date": "{{ isotime }}"
+        "date": "{{ isotime }}",
+        "github": "fooock"
       },
       "snapshot_name": "valheim-server-{{ isotime }}"
     }
