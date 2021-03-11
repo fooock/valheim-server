@@ -1,0 +1,20 @@
+on:
+  push:
+    paths:
+      - '.github/workflows/packer.yml'
+      - 'valheim-packer/**'
+      - 'valheim-ansible/game-role/**'
+      - 'valheim-ansible/playbook.yml'
+      - 'valheim-ansible/requirements.yml'
+
+jobs:
+  packer:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate packer template file
+        uses: operatehappy/packer-github-actions@master
+        with:
+          command: validate
+          arguments: --syntax-only
+          target: ./valheim-packer/hcloud.json
