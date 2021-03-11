@@ -9,8 +9,12 @@ User={{ steam_user }}
 Group={{ steam_user }}
 EnvironmentFile={{ game_dir }}/values.env
 WorkingDirectory={{ game_dir }}
+
 ExecStartPre={{ steam_cmd_dir }}/steamcmd.sh +login anonymous +force_install_dir {{ game_dir }} +app_update {{ game_id }} validate +exit
 ExecStart={{ game_dir }}/my-start.sh
+CapabilityBoundingSet=CAP_SYS_NICE
+AmbientCapabilities=CAP_SYS_NICE
+
 KillSignal=SIGINT
 ExecReload=/bin/kill -s HUP $MAINPID
 RestartSec=5
