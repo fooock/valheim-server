@@ -8,6 +8,7 @@
   apt:
     pkg:
       - lib32gcc1
+      - libsdl2-2.0-0
     update_cache: yes
 
 - name: "Create {{ steam_cmd_dir }} directory"
