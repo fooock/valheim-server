@@ -35,11 +35,11 @@ Now you need to wait the command to finish. Be patient and take a coffee :coffee
 
 ## Configuration
 
-Now that you have your game server installed, you need to change some settings like the gameserver password, world name etc. All this can be configured editing the `/home/steam/valheim/values.env` file, assuming the default configuration. Default values are:
+Now that you have your game server installed, you need to change some settings like the gameserver password, world name etc. All this can be configured by editing the `/home/steam/valheim/values.env` file, assuming the default configuration. Default values are:
 
 | Variable      	| Default value       	| Description                              	|
 |---------------	|---------------------	|------------------------------------------	|
-| `GS_NAME`     	| `My Valheim server` 	| The name of your game server             	|
+| `GS_NAME`     	| `My Valheim gameserver` 	| The name of your game server             	|
 | `GS_PORT`     	| `2456`              	| Game server port                         	|
 | `GS_WORLD`    	| `Dedicated`         	| The world name without spaces             |
 | `GS_PASSWORD` 	| `secret`            	| Game server password. Min. length is 5   	|
@@ -48,7 +48,7 @@ Now that you have your game server installed, you need to change some settings l
 When done, the only thing that you need to do for the new values to take effect is restart the systemd service of our game server using:
 
 ```bash
-# systemctl restart valheim
+systemctl restart valheim
 ```
 
 ## Using `Packer`
