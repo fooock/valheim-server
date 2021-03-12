@@ -33,6 +33,24 @@ make TARGET_IP=1.2.3.4 TARGET_USER=root ansible-install
 
 Now you need to wait the command to finish. Be patient and take a coffee :coffee:.
 
+## Configuration
+
+Now that you have your game server installed, you need to change some settings like the gameserver password, world name etc. All this can be configured editing the `/home/steam/valheim/values.env` file, assuming the default configuration. Default values are:
+
+| Variable      	| Default value       	| Description                              	|
+|---------------	|---------------------	|------------------------------------------	|
+| `GS_NAME`     	| `My Valheim server` 	| The name of your game server             	|
+| `GS_PORT`     	| `2456`              	| Game server port                         	|
+| `GS_WORLD`    	| `Dedicated`         	| The world name                           	|
+| `GS_PASSWORD` 	| `secret`            	| Game server password. Min. length is 5   	|
+| `GS_PUBLIC`   	| `1`                 	| Foe public servers is `1`, otherwise `0` 	|
+
+When done, the only thing that you need to do for the new values to take effect is restart the systemd service of our game server using:
+
+```
+# systemctl restart valheim
+```
+
 ## Using `Packer`
 
 If you want to use `Packer` to create game server snapshots continue reading. Note that the list of currently supported cloud providers is not complete. If you want to add a new cloud provider, create a [feature request](https://github.com/fooock/valheim-server/issues).
