@@ -25,7 +25,7 @@ Note that at this time, the game server only supports [`Ubuntu`](https://ubuntu.
 
 First, clone this repository. When done, execute the following command using your own values for the `TARGET_USER` and `TARGET_IP` variables that correspond to **your** server info:
 
-```sh
+```bash
 make TARGET_IP=1.2.3.4 TARGET_USER=root ansible-install
 ```
 
@@ -41,13 +41,13 @@ Now that you have your game server installed, you need to change some settings l
 |---------------	|---------------------	|------------------------------------------	|
 | `GS_NAME`     	| `My Valheim server` 	| The name of your game server             	|
 | `GS_PORT`     	| `2456`              	| Game server port                         	|
-| `GS_WORLD`    	| `Dedicated`         	| The world name                           	|
+| `GS_WORLD`    	| `Dedicated`         	| The world name without spaces             |
 | `GS_PASSWORD` 	| `secret`            	| Game server password. Min. length is 5   	|
-| `GS_PUBLIC`   	| `1`                 	| Foe public servers is `1`, otherwise `0` 	|
+| `GS_PUBLIC`   	| `1`                 	| For public servers is `1`, otherwise `0` 	|
 
 When done, the only thing that you need to do for the new values to take effect is restart the systemd service of our game server using:
 
-```
+```bash
 # systemctl restart valheim
 ```
 
