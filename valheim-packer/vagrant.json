@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "vagrant_provider": "virtualbox"
+  },
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./valheim-ansible/playbook.yml",
+      "galaxy_file": "./valheim-ansible/requirements.yml",
+      "galaxy_force_install": true
+    }
+  ],
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "ubuntu/focal64",
+      "provider": "{{user `vagrant_provider`}}",
+      "add_force": true,
+      "type": "vagrant",
+      "output_vagrantfile": "vagrantfile-valheim-{{user `vagrant_provider`}}"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "vagrant-{{user `vagrant_provider`}}-manifest.json"
+    }
+  ]
+}
