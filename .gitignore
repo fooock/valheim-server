@@ -32,4 +32,9 @@ nb-configuration.xml
 # Local environment
 .env
 hcloud-manifest.json
-/valheim-agent/valheim-agent
+
+# vagrant
+.vagrant
+output-vagrant
+vagrant-virtualbox-manifest.json
+

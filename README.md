@@ -67,6 +67,18 @@ make CLOUD=hcloud packer-run
 
 Now, wait until finish.
 
+#### [`Vagrant`](https://www.vagrantup.com/)
+
+>ID: `vagrant`
+
+You will need to have Vagrant and VirtualBox to use this installation method. Just execute this command and wait until finish:
+
+```bash
+make CLOUD=vagrant packer-run
+```
+
+The resulting box will be created in `output-vagrant/package.box`
+
 ## License
 
 Check [`LICENSE`](LICENSE) for more information.

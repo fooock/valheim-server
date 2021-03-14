@@ -1,4 +1,5 @@
 - name: Provision Valheim game server image
+  become: true
   hosts: all
 
   pre_tasks:
