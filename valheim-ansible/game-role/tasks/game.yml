@@ -19,7 +19,7 @@
   ansible.builtin.shell: "{{ steam_cmd_dir }}/steamcmd.sh +login anonymous +force_install_dir {{ game_dir }} +app_update {{ game_id }} validate +exit"
   become: true
   become_user: "{{ steam_user }}"
-  become_method: su
+  become_method: sudo
   tags:
     - molecule-notest
     - notest

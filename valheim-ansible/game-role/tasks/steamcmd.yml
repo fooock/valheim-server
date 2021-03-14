@@ -45,7 +45,7 @@
   ansible.builtin.shell: "{{ steam_cmd_dir }}/steamcmd.sh +quit"
   become: true
   become_user: "{{ steam_user }}"
-  become_method: su
+  become_method: sudo
   tags:
     - molecule-notest
     - notest
@@ -70,7 +70,6 @@
     - { src: "{{ steam_cmd_dir }}/linux32/steamclient.so", dest: "{{ steam_user_home }}/.steam/sdk32/steamclient.so" }
     - { src: "{{ steam_cmd_dir }}/linux32/steamcmd", dest: "{{ steam_cmd_dir }}/linux32/steam" }
     - { src: "{{ steam_cmd_dir }}/steamcmd.sh", dest: "{{ steam_cmd_dir }}/steam.sh" }
-    - { src: "{{ steam_cmd_dir }}/linux64/steamclient.so", dest: "/usr/lib/x86_64-linux-gnu/steamclient.so" }
   tags:
     - molecule-notest
     - notest

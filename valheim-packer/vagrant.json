@@ -4,6 +4,13 @@
   },
   "provisioners": [
     {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y acl"
+      ]
+    },
+    {
       "type": "ansible",
       "playbook_file": "./valheim-ansible/playbook.yml",
       "galaxy_file": "./valheim-ansible/requirements.yml",
@@ -15,9 +22,10 @@
       "communicator": "ssh",
       "source_path": "ubuntu/focal64",
       "provider": "{{user `vagrant_provider`}}",
-      "add_force": true,
       "type": "vagrant",
-      "output_vagrantfile": "vagrantfile-valheim-{{user `vagrant_provider`}}"
+      "skip_package": false,
+      "add_force": true,
+      "add_clean": true
     }
   ],
   "post-processors": [
