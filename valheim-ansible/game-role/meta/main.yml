@@ -1,4 +1,6 @@
 galaxy_info:
+  role_name: valheim_game_role
+
   author: fooock
   description: Author of valheimservers.co
   company: valheimservers.co
